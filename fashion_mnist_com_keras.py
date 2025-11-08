@@ -230,7 +230,7 @@ print("Avaliação do modelo com os dados de teste:")
 model.evaluate(test_images, test_labels)
 
 
-# Fazendo previsões com os dados de teste com 10 amostras e arredondando para 2 casas decimais a probabilidade de cada item pertencer a cada classe
+# Fazendo previsões com os dados de teste com X amostras e arredondando para 2 casas decimais a probabilidade de cada item pertencer a cada classe
 numero_de_amostras = 15
 imagens_to_predict = test_images[:numero_de_amostras]
 classes_reais = test_labels[:numero_de_amostras]
@@ -247,7 +247,7 @@ print(
     f"Classes previstas para as {numero_de_amostras} primeiras amostras de teste: {predicted_classes}"
 )
 print(
-    f"Classes reais para as {numero_de_amostras} primeiras amostras de teste: {test_labels[:numero_de_amostras]}"
+    f"    Classes reais para as {numero_de_amostras} primeiras amostras de teste: {test_labels[:numero_de_amostras]}"
 )
 
 
