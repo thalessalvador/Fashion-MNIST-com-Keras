@@ -15,9 +15,9 @@ Para configurar o ambiente de desenvolvimento, siga os passos abaixo.
 python -m venv .venv
 ```
 
-2. Ative o ambiente virtual (Windows):
+2. Ative o ambiente virtual:
 ```bash
-.venv\Scripts\activate
+source .venv/bin/activate #Windows: .venv\Scripts\activate
 ```
 
 3. Instale as dependências:
