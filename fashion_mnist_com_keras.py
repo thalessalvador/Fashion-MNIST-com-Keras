@@ -3,6 +3,7 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import math
 
 # print(f"TensorFlow version: {tf.__version__}")
 # print(f"Keras version: {keras.__version__}")
@@ -34,6 +35,7 @@ for i in range(largura_imagem):
 
 # Normalizando os dados entre 0 e 1
 train_and_valid_images = train_and_valid_images / 255.0
+test_images = test_images / 255.0
 
 
 # Dividir os dados de train_and_valid_images e train_and_valid_labels deixando 5000 amostras para X_valid_images e y_valid_labels e o restante para X_train_images e y_train_labels
@@ -89,8 +91,8 @@ def plot_images(
     """
     plt.figure(figsize=img_size)
     for i in range(num_images):
-        # Criando um subplot para cada imagem
-        plt.subplot(2, 5, i + 1)
+        # Criando um subplot para cada imagem (calcula automaticamente o número de linhas necessárias)
+        plt.subplot(math.ceil(num_images / 5), 5, i + 1)
         # Imprimindo a imagem em escala de cinza
         plt.imshow(images[i], cmap="gray")
         # Imprimindo o título com o nome da classe correspondente utilizando fonte menor
@@ -213,7 +215,7 @@ sparse_categorical_crossentropy é a melhor escolha porque seus dados já vieram
 history = model.fit(
     X_train_images,
     y_train_labels,
-    epochs=180,
+    epochs=29,
     batch_size=32,  # No nosso caso, gerará 55.000 / 32 +-= 1718 batches por época
     validation_data=(X_valid_images, y_valid_labels),
 )
@@ -223,3 +225,37 @@ pd.DataFrame(history.history).plot(figsize=(8, 5))
 plt.grid(True)
 plt.gca().set_ylim(0, 1)  # Definindo o limite do eixo y entre 0 e 1
 plt.show()
+
+
+print("Avaliação do modelo com os dados de teste:")
+model.evaluate(test_images, test_labels)
+
+
+# Fazendo previsões com os dados de teste com 10 amostras e arredondando para 2 casas decimais a probabilidade de cada item pertencer a cada classe
+numero_de_amostras = 15
+imagens_to_predict = test_images[:numero_de_amostras]
+classes_reais = test_labels[:numero_de_amostras]
+
+predictions = (model.predict(imagens_to_predict[:numero_de_amostras])).round(2)
+print(
+    f"Predições em probabilidade para as {numero_de_amostras} primeiras amostras de teste:\n{predictions}"
+)
+
+# Imprimindo as classes previstas para as primeiras amostras de teste (np.argmax para pegar o índice da maior probabilidade em cada predição)
+predicted_classes = np.argmax(predictions, axis=1)
+
+print(
+    f"Classes previstas para as {numero_de_amostras} primeiras amostras de teste: {predicted_classes}"
+)
+print(
+    f"Classes reais para as {numero_de_amostras} primeiras amostras de teste: {test_labels[:numero_de_amostras]}"
+)
+
+
+# Imprimindo predições detalhadas para as primeiras amostras de teste
+plot_images(
+    imagens_to_predict,
+    predicted_classes,
+    class_names,
+    num_images=numero_de_amostras,
+)
