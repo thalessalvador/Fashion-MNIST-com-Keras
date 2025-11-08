@@ -70,7 +70,6 @@ class_names = [
 ]
 
 # Imprimindo as 10 primeiras imagens e labels de treino
-import matplotlib.pyplot as plt
 
 
 def plot_images(
