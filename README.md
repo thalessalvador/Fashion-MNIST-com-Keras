@@ -22,5 +22,6 @@ source .venv/bin/activate #Windows: .venv\Scripts\activate
 
 3. Instale as dependências:
 ```bash
-python -m pip install --upgrade tensorflow
+python -m pip install -r requirements.txt
+
 ```
