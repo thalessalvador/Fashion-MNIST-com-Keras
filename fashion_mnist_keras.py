@@ -73,7 +73,7 @@ class_names = [
 
 
 def plot_images(
-    images, labels, class_names, img_size=(4, 4), title_fontsize=5, num_images=10
+    images, labels, class_names, img_size=(8, 8), title_fontsize=5, num_images=10
 ):
     """Exibe uma grade de imagens com seus respectivos rótulos.
 

@@ -29,4 +29,5 @@ python -m pip install -r requirements.txt
 4. Rode
 ```bash
 python fashion_mnist_keras.py    
+python california_housing_keras.py
 ```
