@@ -1,6 +1,6 @@
 # Estudos de Keras utilizando Fashion MNIST
 
-Este repositório contém estudos e implementações de redes neurais com Keras, utilizando o dataset Fashion MNIST.
+Este repositório contém estudos e implementações de redes neurais com Keras/TensorFlow, utilizando o dataset Fashion MNIST e California Housing.
 
 ## Pré-requisitos
 
